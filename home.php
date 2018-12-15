@@ -10,7 +10,7 @@
 
 	<link rel="stylesheet" href="css/style.css">
 </head>
-<body style="background-color: #2c3e50">
+<body style="background-color: #2c3e50"> 
 	<div id="main-wrapper">
 		<center><h2>Home</h2>
 			<h3>Welcome
@@ -23,7 +23,7 @@
 			
             <?php if ($_SESSION['profession'] == "Doctor") { ?>
 			
-                
+                <form class="gradesform" action="home.php" method="post"><br>
 		<label><b>Student name</label>
 		<input name="student_name" type="text" class="inputvalues" placeholder="Type the student name"required/><br><br>
 		<label><b>Course</label>
@@ -35,7 +35,7 @@
                 <?php
             }  ?>
         <input name="view_btn" type="submit" id="signup_btn" value="View Grades"><br>
-		
+		</form>
          
 		<form class="myform" action="home.php" method="post"><br>
 		
@@ -50,10 +50,8 @@ if(isset($_POST['submit_btn']))
 	$student_name = $_POST['student_name'];
 	$course = $_POST['course'];
 	$grade = $_POST['grade'];
-
-	$sql= "select * from grades WHERE student_name='$student_name'";
-
-	$sql = "insert into grades values ('$student_name', '$course','$grade')";
+	$sql = "INSERT INTO `grades` (`student_name`, `course`, `grade`) VALUES ('$student_name', '$course','$grade')";
+	$conn = mysqli_connect("localhost","root", "", "samplelogindb"); 
 
     if (mysqli_query($conn, $sql)) {
     echo "New record entered successfully";
